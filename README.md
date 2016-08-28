@@ -9,3 +9,8 @@ my friends know that I would not receive their messages unless they
 sent them some other way.  This script allows you to set up a simple
 auto-responder that will be sent when a new conversation is started
 with you on Facebook messenger.
+
+## Credits
+
+- All the heavy lifting is done using the
+[facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) module.
