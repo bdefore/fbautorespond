@@ -1,7 +1,7 @@
 var fs = require('fs');
 var login = require("facebook-chat-api");
 var argv = require('optimist')
-    .usage('Autorespond to Facebook messages.\nUsage: $0')
+    .usage('Auto-respond to Facebook messages.\nUsage: $0')
     .describe('response', 'The response to send on new messages')
     .describe('email', 'The email address to login with')
     .describe('password', 'The password to authenticate with')
