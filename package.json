@@ -1,0 +1,13 @@
+{
+  "name": "fbautorespond",
+  "version": "0.1.0",
+  "description": "Auto-respond to Facebook messages",
+  "main": "main.js",
+  "author": "Jamie Kirkpatrick",
+  "license": "ISC",
+  "dependencies": {
+    "facebook-chat-api": "^1.2.0",
+    "optimist": "^0.6.1",
+    "readline-sync": "^1.4.4"
+  }
+}
