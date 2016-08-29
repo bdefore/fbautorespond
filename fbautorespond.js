@@ -1,6 +1,6 @@
 var fs = require('fs');
 var login = require("facebook-chat-api");
-var argv = require('optimist')
+var argv = require('yargs')
     .usage('Auto-respond to Facebook messages.\n')
     .describe('response', 'The response to send on new messages')
     .describe('email', 'The email address to login with')
