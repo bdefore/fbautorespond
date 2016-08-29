@@ -27,9 +27,9 @@ Options:
 
 ## Hosting
 
-The script is [Dockerized](https://hub.docker.com/r/jamiekp/fbautorespond/)
-for easy deployment on a server somewhere. You can configure the script by 
-setting the following environment variables:
+The script is [Dockerized](https://hub.docker.com/r/jamiekp/fbautorespond/) for 
+easy deployment on a server somewhere. You can configure the script bysetting 
+the following environment variables:
 
 * `FB_AUTORESPOND_RESPONSE`
 * `FB_AUTORESPOND_EMAIL`
