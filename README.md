@@ -10,7 +10,13 @@ This script allows you to set up a simple auto-responder that will be sent when 
 
 ## Usage
 
-Command line usage is as follows:
+To configure the the script to run locally:
+
+- Ensure you have `node.js` installed on your host machine.
+- Checkout the repository or download the [source](https://github.com/jkp/fbautorespond/archive/master.zip)
+- From the project directory run `npm install`.
+
+Then, command line usage is as follows:
 
 ```
 $ node fbautorespond.js
