@@ -32,14 +32,14 @@ login(argv, function callback (err, api) {
     } else if (message.type == 'message') {
       var thread = threads[message.threadID] || {};
       if (!(message.senderID in thread)) {
-      	console.log('Received message from new sender: ' + message);
+      	console.log('Received message from new sender: ', message);
 	api.sendMessage({
 	  body: argv.response
 	}, message.threadID);
 	thread[message.senderID] = true;
 	threads[message.threadID] = thread;
       } else {
-      	console.log('Ignoring message from known sender: ' + message);
+      	console.log('Ignoring message from known sender: ', message);
       }
     }
   });
