@@ -19,6 +19,12 @@ login(argv, function callback (err, api) {
   if(err) {
     return console.error(err);
   }
+  
+  api.setOptions({
+      forceLogin: true,
+      logLevel: "warn"
+  });
+  
   var threads = {};
   api.listen(function callback(err, message) {
     if (err) {
