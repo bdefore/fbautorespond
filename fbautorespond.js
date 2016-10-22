@@ -19,12 +19,12 @@ login(argv, function callback (err, api) {
   if(err) {
     return console.error(err);
   }
-  
+
   api.setOptions({
       forceLogin: true,
       logLevel: "warn"
   });
-  
+
   var threads = {};
   api.listen(function callback(err, message) {
     if (err) {
@@ -33,9 +33,7 @@ login(argv, function callback (err, api) {
       var thread = threads[message.threadID] || {};
       if (!(message.senderID in thread)) {
       	console.log('Received message from new sender: ', message);
-	api.sendMessage({
-	  body: argv.response
-	}, message.threadID);
+	api.sendMessage(argv.response, message.threadID);
 	thread[message.senderID] = true;
 	threads[message.threadID] = thread;
       } else {
