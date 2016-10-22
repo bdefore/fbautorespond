@@ -1,6 +1,6 @@
 {
   "name": "fbautorespond",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Auto-respond to Facebook messages",
   "main": "main.js",
   "author": "Jamie Kirkpatrick",
