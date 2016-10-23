@@ -30,7 +30,7 @@ Options:
 
 ### Two-factor login
 
-Two-factor login is not implemented right now though it [is supported[(https://github.com/Schmavery/facebook-chat-api/blob/master/DOCS.md#login) by the underlying library I use to interact with Facebook so it shouldn't be too hard to handle it if needed.  Feel free to submit a pull-request if you have the time to make it work.
+Two-factor login is not implemented right now though it [is supported](https://github.com/Schmavery/facebook-chat-api/blob/master/DOCS.md#login) by the underlying library I use to interact with Facebook so it shouldn't be too hard to handle it if needed.  Feel free to submit a pull-request if you have the time to make it work.
 
 ## Hosting
 
