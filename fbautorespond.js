@@ -13,25 +13,24 @@ var argv = require('yargs')
     .demand('response')
     .default('log-level', 'info')
     .check(function(argv) {
+      log.level = argv.logLevel;
       return ['error', 'warn', 'info', 'verbose'].includes(argv.logLevel);
     })
     .argv;
 
-var stateFile = 'appstate.json';
-if (fs.existsSync(stateFile)) {
-  delete argv.username, argv.password;
-  argv.appState = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
-} else if (!argv.password) {
-  argv.password = require('readline-sync').question('Password? ', {
-    hideEchoBack: true
-  });
-}
-
-log.level = argv.logLevel;
-
 function autorespond() {
   var stopListening;
   var logout;
+
+  var stateFile = 'appstate.json';
+  if (fs.existsSync(stateFile)) {
+    delete argv.username, argv.password;
+    argv.appState = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
+  } else if (!argv.password) {
+    argv.password = require('readline-sync').question('Password? ', {
+      hideEchoBack: true
+    });
+  }
 
   function stop(callback) {
     if (stopListening) {
