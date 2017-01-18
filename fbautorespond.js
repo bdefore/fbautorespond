@@ -7,7 +7,7 @@ var argv = require('yargs')
     .describe('response', 'The response to send on new messages')
     .describe('email', 'The email address to login with')
     .describe('password', 'The password to authenticate with')
-    .describe('restart', 'An optional number of minutes to restart after')
+    .describe('relogin', 'An optional number of minutes to relogin after')
     .describe('log-level', '[error|warn|info|verbose] - defaults to info')
     .demand('email')
     .demand('response')
@@ -27,20 +27,33 @@ if (fs.existsSync(stateFile)) {
   });
 }
 
-function autorespond() {
-  login(argv, function callback (err, api) {
-    api.setOptions({
-      logLevel: argv.logLevel
-    });
+log.level = argv.logLevel;
 
+function autorespond() {
+  var stopListening;
+  var logout;
+
+  function stop(callback) {
+    if (stopListening) {
+      stopListening();
+    }
+    if (logout) {
+      logout(callback);
+    } else {
+      callback();
+    }
+  }
+
+  login(argv, function callback (err, api) {
     if (err) {
       log.error(err);
       process.exit(1);
     }
     fs.writeFileSync(stateFile, JSON.stringify(api.getAppState()));
+    logout = api.logout;
 
     var threads = {};
-    api.listen(function callback(err, message) {
+    stopListening = api.listen(function callback(err, message) {
       if (err) {
         log.warn(err);
       } else if (message.type == 'message') {
@@ -58,34 +71,24 @@ function autorespond() {
       }
     });
   });
+  return stop;
 }
 
-// The keep-alive parameter forces the script to restart on at a given
-// interval: this is currently needed for long-running instances because
-// of a bug in the underlying library we are using.
+// The keep-alive parameter forces the script to re-login at a given
+// interval: this is currently needed for long-running instances
+// because of a bug in the underlying library we are using.
 // https://github.com/Schmavery/facebook-chat-api/issues/202
-if (argv['restart']) {
-  var fork = require('child_process').fork;
-  var timeout = argv['restart'] * 60 * 1000;  // timeout in ms
-
-  process.env['FB_AUTORESPOND_EMAIL'] = argv.email;
-  process.env['FB_AUTORESPOND_PASSWORD'] = argv.password;
-  process.env['FB_AUTORESPOND_RESPONSE'] = argv.response;
-  process.env['FB_AUTORESPOND_LOG_LEVEL'] = argv.logLevel;
-
-  var child = fork(argv['$0'], []);
+if (argv['relogin']) {
   var i = 0;
-  setInterval(function() {
-    log.info('Restarting after ' + ++i * argv['restart'] + ' minutes');
-    child.kill();
-    child = fork(argv['$0'], []);
-  }, timeout);
+  var timeout = argv['relogin'] * 60 * 1000;  // timeout in ms
+  var stop = autorespond();
 
-  child.on('close', (code, signal) => {
-    if (code && !signal) {
-      process.exit(code);
-    }
-  });
+  setInterval(function() {
+    log.info('Refreshing login ' + ++i * argv['relogin'] + ' minutes');
+    stop(function() {
+      stop = autorespond();
+    });
+  }, timeout);
 } else {
   autorespond();
 }
