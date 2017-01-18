@@ -16,19 +16,18 @@ var argv = require('yargs')
       return ['error', 'warn', 'info', 'verbose'].includes(argv.logLevel);
     })
     .argv;
-if (!argv.password) {
+
+var stateFile = 'appstate.json';
+if (fs.existsSync(stateFile)) {
+  delete argv.username, argv.password;
+  argv.appState = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
+} else if (!argv.password) {
   argv.password = require('readline-sync').question('Password? ', {
     hideEchoBack: true
   });
 }
 
 function autorespond() {
-  var stateFile = 'appstate.json';
-  if (fs.existsSync(stateFile)) {
-    delete argv.username, argv.password;
-    argv.appState = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
-  }
-
   login(argv, function callback (err, api) {
     api.setOptions({
       logLevel: argv.logLevel
