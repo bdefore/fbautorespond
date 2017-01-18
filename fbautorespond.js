@@ -36,11 +36,7 @@ function autorespond() {
     if (stopListening) {
       stopListening();
     }
-    if (logout) {
-      logout(callback);
-    } else {
-      callback();
-    }
+    callback();
   }
 
   login(argv, function callback (err, api) {
@@ -49,7 +45,6 @@ function autorespond() {
       process.exit(1);
     }
     fs.writeFileSync(stateFile, JSON.stringify(api.getAppState()));
-    logout = api.logout;
 
     var threads = {};
     stopListening = api.listen(function callback(err, message) {
