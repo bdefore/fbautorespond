@@ -23,10 +23,16 @@ $ node fbautorespond.js
 Auto-respond to Facebook messages.
 
 Options:
-  --response  The response to send on new messages                    [required]
-  --email     The email address to login with                         [required]
-  --password  The password to authenticate with
-```
+  --response   The response to send on new messages                    [required]
+  --email      The email address to login with                         [required]
+  --password   The password to authenticate with
+  --relogin    An optional number of minutes to relogin after
+  --log-level  [error|warn|info|verbose] - defaults to info    [default: "info"]
+  ```
+
+### Re-logins
+
+There is currently a [bug in the library](https://github.com/Schmavery/facebook-chat-api/issues/202) used to connect to Facebook which can cause the script to start erroring after unspecified period of time (usually a few days).  To work around this you can set the script to re-login at a given interval which should keep your connection stable.
 
 ### Two-factor login
 
