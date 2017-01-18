@@ -1,5 +1,6 @@
 var fs = require('fs');
 var login = require("facebook-chat-api");
+var log = require('npmlog');
 var argv = require('yargs')
     .usage('Auto-respond to Facebook messages.\n')
     .env('FB_AUTORESPOND')
@@ -7,8 +8,13 @@ var argv = require('yargs')
     .describe('email', 'The email address to login with')
     .describe('password', 'The password to authenticate with')
     .describe('restart', 'An optional number of minutes to restart after')
+    .describe('log-level', '[error|warn|info|verbose] - defaults to info')
     .demand('email')
     .demand('response')
+    .default('log-level', 'info')
+    .check(function(argv) {
+      return ['error', 'warn', 'info', 'verbose'].includes(argv.logLevel);
+    })
     .argv;
 if (!argv.password) {
   argv.password = require('readline-sync').question('Password? ', {
@@ -24,30 +30,31 @@ function autorespond() {
   }
 
   login(argv, function callback (err, api) {
+    api.setOptions({
+      logLevel: argv.logLevel
+    });
+
     if (err) {
-      console.error(err);
+      log.error(err);
       process.exit(1);
     }
     fs.writeFileSync(stateFile, JSON.stringify(api.getAppState()));
 
-    api.setOptions({
-      forceLogin: true,
-      logLevel: "warn"
-    });
-
     var threads = {};
     api.listen(function callback(err, message) {
       if (err) {
-        console.log(err);
+        log.warn(err);
       } else if (message.type == 'message') {
         var thread = threads[message.threadID] || {};
         if (!(message.senderID in thread)) {
-          console.log('Received message from new sender: ', message);
+          log.info('Received message from new sender: ', message.senderID);
+          log.verbose('Message: ', message);
           api.sendMessage(argv.response, message.threadID);
           thread[message.senderID] = true;
           threads[message.threadID] = thread;
         } else {
-          console.log('Ignoring message from known sender: ', message);
+          log.verbose('Ignoring message from known sender: ', message.senderID);
+          log.verbose('Message: ', message);
         }
       }
     });
@@ -65,11 +72,12 @@ if (argv['restart']) {
   process.env['FB_AUTORESPOND_EMAIL'] = argv.email;
   process.env['FB_AUTORESPOND_PASSWORD'] = argv.password;
   process.env['FB_AUTORESPOND_RESPONSE'] = argv.response;
+  process.env['FB_AUTORESPOND_LOG_LEVEL'] = argv.logLevel;
 
   var child = fork(argv['$0'], []);
   var i = 0;
   setInterval(function() {
-    console.log('Restarting after ' + ++i * argv['restart'] + ' minutes');
+    log.info('Restarting after ' + ++i * argv['restart'] + ' minutes');
     child.kill();
     child = fork(argv['$0'], []);
   }, timeout);

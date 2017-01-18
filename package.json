@@ -1,6 +1,6 @@
 {
   "name": "fbautorespond",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Auto-respond to Facebook messages",
   "main": "main.js",
   "author": "Jamie Kirkpatrick",
@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "facebook-chat-api": "^1.2.0",
+    "npmlog": "https://registry.npmjs.org/npmlog/-/npmlog-1.2.1.tgz",
     "readline-sync": "^1.4.4",
     "yargs": "^5.0.0"
   },
@@ -21,4 +22,3 @@
     "preinstall": "secure-shrinkwrap"
   }
 }
-
