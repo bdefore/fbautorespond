@@ -32,6 +32,10 @@ Options:
 
 Two-factor login is not implemented right now though it [is supported](https://github.com/Schmavery/facebook-chat-api/blob/master/DOCS.md#login) by the underlying library I use to interact with Facebook so it shouldn't be too hard to handle it if needed.  Feel free to submit a pull-request if you have the time to make it work.
 
+## Remote kill-switch
+
+Active Facebook sessions can be [tracked and managed here](Facebook tracks all active sessions which can be) so essions can be killed remotely at that page.
+
 ## Hosting
 
 The script is [Dockerized](https://hub.docker.com/r/jamiekp/fbautorespond/) for easy deployment on a server somewhere. You can configure the script by setting the following environment variables:
