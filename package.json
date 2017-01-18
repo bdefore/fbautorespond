@@ -14,7 +14,6 @@
     "readline-sync": "^1.4.4",
     "yargs": "^5.0.0"
   },
-  {
   "devDependencies": {
     "secure-shrinkwrap": "0.0.1"
   },
