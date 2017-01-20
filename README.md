@@ -40,7 +40,7 @@ Two-factor login is not implemented right now though it [is supported](https://g
 
 ## Remote kill-switch
 
-Active Facebook sessions can be [tracked and managed here](Facebook tracks all active sessions which can be) so essions can be killed remotely at that page.
+Active Facebook sessions can be [tracked and managed here](https://www.facebook.com/settings?tab=security&section=sessions&view#_=_): sessions can be killed remotely at that page.
 
 ## Hosting
 
