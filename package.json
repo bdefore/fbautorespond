@@ -11,21 +11,24 @@
   "license": "ISC",
   "dependencies": {
     "facebook-chat-api": "^1.2.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.17.1",
+    "moment-parser": "^0.3.0",
     "npmlog": "https://registry.npmjs.org/npmlog/-/npmlog-1.2.1.tgz",
     "readline-sync": "^1.4.4",
     "yargs": "^5.0.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "^3.15.0",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.2.0",
     "grunt": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-eslint": "^19.0.0",
+    "grunt-simple-mocha": "^0.4.1",
     "load-grunt-tasks": "^3.5.2",
-    "secure-shrinkwrap": "0.0.1"
-  },
-  "scripts": {
-    "preinstall": "secure-shrinkwrap"
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7"
   }
 }
