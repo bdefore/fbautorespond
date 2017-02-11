@@ -58,6 +58,12 @@ The script is [Dockerized](https://hub.docker.com/r/jamiekp/fbautorespond/) for 
 * `FB_AUTORESPOND_FORGET_THREADS_AFTER`
 * `FB_AUTORESPOND_LOG_LEVEL`
 
+## TODO
+
+- [] Run unit-tests on automated builds.
+- [] Document golden path for running in the cloud.
+- [] Fix website and link to it in the project description on Github.
+
 ## Donations
 
 If you find this software useful, donations are more than welcome:
