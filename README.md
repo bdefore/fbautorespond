@@ -23,12 +23,17 @@ $ node fbautorespond.js
 Auto-respond to Facebook messages.
 
 Options:
-  --response   The response to send on new messages                    [required]
-  --email      The email address to login with                         [required]
-  --password   The password to authenticate with
-  --relogin    An optional number of minutes to relogin after
-  --log-level  [error|warn|info|verbose] - defaults to info    [default: "info"]
+  --response              The response to send on new messages        [required]
+  --email                 The email address to login with             [required]
+  --password              The password to authenticate with
+  --relogin               The number of minutes to relogin after
+  --forget-threads-after  Time to wait before forgetting threads
+  --log-level             [error|warn|info|verbose] - defaults to info
   ```
+
+### Message handling semantics
+
+The default behaviour is to respond once and only once to each new thread.  If you want to resend your auto-response after a given period you can use `--forget-threads-after "<some duration>"`.  Durations are specified as natural language strings, e.g "1 week", "2 hours" etc.
 
 ### Re-logins
 
@@ -49,6 +54,9 @@ The script is [Dockerized](https://hub.docker.com/r/jamiekp/fbautorespond/) for 
 * `FB_AUTORESPOND_RESPONSE`
 * `FB_AUTORESPOND_EMAIL`
 * `FB_AUTORESPOND_PASSWORD`
+* `FB_AUTORESPOND_RELOGIN`
+* `FB_AUTORESPOND_FORGET_THREADS_AFTER`
+* `FB_AUTORESPOND_LOG_LEVEL`
 
 ## Donations
 
@@ -60,3 +68,4 @@ If you find this software useful, donations are more than welcome:
 ## Credits
 
 - All the heavy lifting is done using the [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) module.
+`
