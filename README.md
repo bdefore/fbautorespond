@@ -50,6 +50,13 @@ The script is [Dockerized](https://hub.docker.com/r/jamiekp/fbautorespond/) for 
 * `FB_AUTORESPOND_EMAIL`
 * `FB_AUTORESPOND_PASSWORD`
 
+## Donations
+
+If you find this software useful, donations are more than welcome:
+
+- Bitcoin: `1E23XPM4439kEELbPx4PqK9JSjBWaTJucB`
+- Monero: `4HNxmqCg8o4f9uCMN7aS8VUcXRf5nfUX8VK4xWENDViGhNSf559AJxkRzm5TnRgtUG7C3CLiMtmgpT1VSirkoHN7EvbuJQZ3hY8QBvh1GS`
+
 ## Credits
 
 - All the heavy lifting is done using the [facebook-chat-api](https://github.com/Schmavery/facebook-chat-api) module.
