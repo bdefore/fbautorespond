@@ -1,7 +1,8 @@
-var fs = require('fs');
-var login = require("facebook-chat-api");
-var log = require('npmlog');
-var argv = require('yargs')
+const fs = require('fs');
+const log = require('npmlog');
+const login = require('facebook-chat-api');
+const readline = require('readline-sync');
+const argv = require('yargs')
     .usage('Auto-respond to Facebook messages.\n')
     .env('FB_AUTORESPOND')
     .describe('response', 'The response to send on new messages')
@@ -12,23 +13,23 @@ var argv = require('yargs')
     .demand('email')
     .demand('response')
     .default('log-level', 'info')
-    .check(function(argv) {
-      log.level = argv.logLevel;
-      return ['error', 'warn', 'info', 'verbose'].includes(argv.logLevel);
+    .check((args) => {
+      log.level = args.logLevel;
+      return ['error', 'warn', 'info', 'verbose'].includes(args.logLevel);
     })
     .argv;
 
 function autorespond() {
-  var stopListening;
-  var logout;
+  let stopListening;
 
-  var stateFile = 'appstate.json';
+  const stateFile = 'appstate.json';
   if (fs.existsSync(stateFile)) {
-    delete argv.username, argv.password;
+    delete argv.username;
+    delete argv.password;
     argv.appState = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
   } else if (!argv.password) {
-    argv.password = require('readline-sync').question('Password? ', {
-      hideEchoBack: true
+    argv.password = readline.question('Password? ', {
+      hideEchoBack: true,
     });
   }
 
@@ -39,19 +40,19 @@ function autorespond() {
     callback();
   }
 
-  login(argv, function callback (err, api) {
+  login(argv, (err, api) => {
     if (err) {
       log.error(err);
       process.exit(1);
     }
     fs.writeFileSync(stateFile, JSON.stringify(api.getAppState()));
 
-    var threads = {};
-    stopListening = api.listen(function callback(err, message) {
-      if (err) {
-        log.warn(err);
-      } else if (message.type == 'message') {
-        var thread = threads[message.threadID] || {};
+    const threads = {};
+    stopListening = api.listen((listenErr, message) => {
+      if (listenErr) {
+        log.warn(listenErr);
+      } else if (message.type === 'message') {
+        const thread = threads[message.threadID] || {};
         if (!(message.senderID in thread)) {
           log.info('Received message from new sender: ', message.senderID);
           log.verbose('Message: ', message);
@@ -72,14 +73,15 @@ function autorespond() {
 // interval: this is currently needed for long-running instances
 // because of a bug in the underlying library we are using.
 // https://github.com/Schmavery/facebook-chat-api/issues/202
-if (argv['relogin']) {
-  var i = 0;
-  var timeout = argv['relogin'] * 60 * 1000;  // timeout in ms
-  var stop = autorespond();
+if (argv.relogin) {
+  let i = 0;
+  const timeout = argv.relogin * 60 * 1000;  // timeout in ms
+  let stop = autorespond();
 
-  setInterval(function() {
-    log.info('Refreshing login ' + ++i * argv['relogin'] + ' minutes');
-    stop(function() {
+  setInterval(() => {
+    i += 1;
+    log.info(`Refreshing login ${i * argv.relogin} minutes`);
+    stop(() => {
       stop = autorespond();
     });
   }, timeout);

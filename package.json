@@ -16,6 +16,13 @@
     "yargs": "^5.0.0"
   },
   "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^19.0.0",
+    "load-grunt-tasks": "^3.5.2",
     "secure-shrinkwrap": "0.0.1"
   },
   "scripts": {
