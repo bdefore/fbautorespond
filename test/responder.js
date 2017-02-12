@@ -33,7 +33,6 @@ describe('Responder', () => {
       });
       responder.handleMessage({
         threadID: threadId,
-        senderID: 2,
       });
       sendMessage.callCount.should.be.equal(1);
       sendMessage.calledWith(response, threadId).should.be.equal(true);
@@ -51,7 +50,6 @@ describe('Responder', () => {
       });
       responder.handleMessage({
         threadID: threadId,
-        senderID: 2,
       });
       sendMessage.callCount.should.be.equal(0);
     });
@@ -68,11 +66,9 @@ describe('Responder', () => {
       });
       responder.handleMessage({
         threadID: threadId,
-        senderID: 2,
       });
       responder.handleMessage({
         threadID: threadId,
-        senderID: 2,
       });
       sendMessage.callCount.should.be.equal(1);
       sendMessage.calledWith(response, threadId).should.be.equal(true);
@@ -88,11 +84,9 @@ describe('Responder', () => {
       });
       responder.handleMessage({
         threadID: threadId,
-        senderID: 2,
       });
       responder.handleMessage({
         threadID: threadId,
-        senderID: 2,
       });
       sendMessage.callCount.should.be.equal(2);
       sendMessage.calledWith(response, threadId).should.be.equal(true);
