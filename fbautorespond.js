@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const fs = require('fs');
 const log = require('npmlog');
 const login = require('facebook-chat-api');
@@ -11,9 +12,13 @@ const argv = require('yargs')
       .describe('email', 'The email address to login with')
       .describe('password', 'The password to authenticate with')
       .describe('relogin', 'The number of minutes to relogin after')
+      .describe('poll-other', 'Interval to poll for messages in the other folder')
+      .describe('poll-pending', 'Interval to poll for messages in the pending folder')
       .describe('forget-threads-after', 'Time to wait before forgetting threads')
       .describe('log-level', '[error|warn|info|verbose] - defaults to info')
       .coerce('forget-threads-after', arg => moment.parseDuration(arg))
+      .coerce('poll-other', arg => moment.parseDuration(arg))
+      .coerce('poll-pending', arg => moment.parseDuration(arg))
       .demand('email')
       .demand('response')
       .default('log-level', 'info')
@@ -23,8 +28,28 @@ const argv = require('yargs')
       })
       .argv;
 
+function pollMessages(api, responder, folder) {
+  log.info(`Polling for ${folder} messages`);
+  // assumes we won't have more than 1000 messages in one go..
+  api.getThreadList(0, 1000, folder, (err, messages) => {
+    if (err) {
+      log.warn(err);
+    } else {
+      const unread = _.filter(
+        messages, message => message.unreadCount && message.canReply);
+      log.info(`Processing ${unread.length} ${folder} messages`);
+      unread.forEach((message) => {
+        responder.handleMessage(message);
+        api.markAsRead(message.threadID);
+      });
+    }
+  });
+}
+
 function autorespond() {
   let stopListening;
+  let pollOther;
+  let pollPending;
 
   const stateFile = 'appstate.json';
   if (fs.existsSync(stateFile)) {
@@ -38,6 +63,12 @@ function autorespond() {
   }
 
   function stop(callback) {
+    if (pollOther) {
+      clearInterval(pollOther);
+    }
+    if (pollPending) {
+      clearInterval(pollPending);
+    }
     if (stopListening) {
       stopListening();
     }
@@ -55,6 +86,16 @@ function autorespond() {
       log,
       response: argv.response,
     });
+    if (argv.pollOther) {
+      pollOther = setInterval(
+        pollMessages.bind(null, api, responder, 'other'),
+        argv.pollOther.asMilliseconds());
+    }
+    if (argv.pollPending) {
+      pollPending = setInterval(
+        pollMessages.bind(null, api, responder, 'pending'),
+        argv.pollPending.asMilliseconds());
+    }
     stopListening = api.listen((listenErr, message) => {
       if (listenErr) {
         log.warn(listenErr);

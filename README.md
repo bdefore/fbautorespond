@@ -27,6 +27,8 @@ Options:
   --email                 The email address to login with             [required]
   --password              The password to authenticate with
   --relogin               The number of minutes to relogin after
+  --poll-other            Interval to poll for messages in the other folder
+  --poll-pending          Interval to poll for messages in the pending folder
   --forget-threads-after  Time to wait before forgetting threads
   --log-level             [error|warn|info|verbose] - defaults to info
   ```
@@ -34,6 +36,8 @@ Options:
 ### Message handling semantics
 
 The default behaviour is to respond once and only once to each new thread.  If you want to resend your auto-response after a given period you can use `--forget-threads-after "<some duration>"`.  Durations are specified as natural language strings, e.g "1 week", "2 hours" etc.
+
+Additionally, by default only messages in the inbox are handled.  If you want to auto-respond to messages in either the 'pending' or 'other' folders you can set a duration to poll for them using the `--pol-pending` and `--poll-other` switches.
 
 ### Re-logins
 

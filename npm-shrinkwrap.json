@@ -1,6 +1,6 @@
 {
   "name": "fbautorespond",
-  "version": "0.2.3",
+  "version": "0.4.0",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -611,12 +611,6 @@
       "resolved": "https://registry.npmjs.org/eslint/-/eslint-3.15.0.tgz",
       "dev": true,
       "dependencies": {
-        "lodash": {
-          "version": "4.17.4",
-          "from": "lodash@>=4.0.0 <5.0.0",
-          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz",
-          "dev": true
-        },
         "strip-bom": {
           "version": "3.0.0",
           "from": "strip-bom@>=3.0.0 <4.0.0",
@@ -742,8 +736,8 @@
     },
     "facebook-chat-api": {
       "version": "1.2.0",
-      "from": "facebook-chat-api@>=1.2.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/facebook-chat-api/-/facebook-chat-api-1.2.0.tgz"
+      "from": "git+https://github.com/jkp/facebook-chat-api.git",
+      "resolved": "git+https://github.com/jkp/facebook-chat-api.git#ab730fdc5db531920319ed1eeb95861f7c2775b7"
     },
     "fast-levenshtein": {
       "version": "2.0.6",
@@ -1034,7 +1028,7 @@
     },
     "grunt-simple-mocha": {
       "version": "0.4.1",
-      "from": "grunt-simple-mocha@latest",
+      "from": "grunt-simple-mocha@>=0.4.1 <0.5.0",
       "resolved": "https://registry.npmjs.org/grunt-simple-mocha/-/grunt-simple-mocha-0.4.1.tgz",
       "dev": true
     },
@@ -1153,15 +1147,7 @@
       "version": "0.12.0",
       "from": "inquirer@>=0.12.0 <0.13.0",
       "resolved": "https://registry.npmjs.org/inquirer/-/inquirer-0.12.0.tgz",
-      "dev": true,
-      "dependencies": {
-        "lodash": {
-          "version": "4.17.4",
-          "from": "lodash@>=4.3.0 <5.0.0",
-          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz",
-          "dev": true
-        }
-      }
+      "dev": true
     },
     "interpret": {
       "version": "1.0.1",
@@ -1274,9 +1260,9 @@
       "dev": true
     },
     "jsbn": {
-      "version": "0.1.0",
+      "version": "0.1.1",
       "from": "jsbn@>=0.1.0 <0.2.0",
-      "resolved": "https://registry.npmjs.org/jsbn/-/jsbn-0.1.0.tgz",
+      "resolved": "https://registry.npmjs.org/jsbn/-/jsbn-0.1.1.tgz",
       "optional": true
     },
     "json-schema": {
@@ -1347,7 +1333,7 @@
     },
     "lodash": {
       "version": "4.17.4",
-      "from": "lodash@latest",
+      "from": "lodash@>=4.17.4 <5.0.0",
       "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz"
     },
     "lodash._baseassign": {
@@ -1530,12 +1516,12 @@
     },
     "moment": {
       "version": "2.17.1",
-      "from": "moment@latest",
+      "from": "moment@>=2.17.1 <3.0.0",
       "resolved": "https://registry.npmjs.org/moment/-/moment-2.17.1.tgz"
     },
     "moment-parser": {
       "version": "0.3.0",
-      "from": "moment-parser@latest",
+      "from": "moment-parser@>=0.3.0 <0.4.0",
       "resolved": "https://registry.npmjs.org/moment-parser/-/moment-parser-0.3.0.tgz"
     },
     "ms": {
@@ -1898,7 +1884,7 @@
     },
     "sinon": {
       "version": "1.17.7",
-      "from": "sinon@latest",
+      "from": "sinon@>=1.17.7 <2.0.0",
       "resolved": "https://registry.npmjs.org/sinon/-/sinon-1.17.7.tgz",
       "dev": true
     },
@@ -2004,12 +1990,6 @@
           "version": "2.0.0",
           "from": "is-fullwidth-code-point@>=2.0.0 <3.0.0",
           "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-2.0.0.tgz",
-          "dev": true
-        },
-        "lodash": {
-          "version": "4.17.4",
-          "from": "lodash@>=4.0.0 <5.0.0",
-          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz",
           "dev": true
         },
         "string-width": {

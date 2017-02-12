@@ -1,6 +1,6 @@
 {
   "name": "fbautorespond",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Auto-respond to Facebook messages",
   "main": "main.js",
   "author": "Jamie Kirkpatrick",
@@ -10,7 +10,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "facebook-chat-api": "^1.2.0",
+    "facebook-chat-api": "git+https://github.com/jkp/facebook-chat-api.git",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
     "moment-parser": "^0.3.0",
