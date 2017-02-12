@@ -43,6 +43,10 @@ There is currently a [bug in the library](https://github.com/Schmavery/facebook-
 
 Two-factor login is not implemented right now though it [is supported](https://github.com/Schmavery/facebook-chat-api/blob/master/DOCS.md#login) by the underlying library I use to interact with Facebook so it shouldn't be too hard to handle it if needed.  Feel free to submit a pull-request if you have the time to make it work.
 
+### Using a proxy server
+
+HTTP proxy servers are [supported](https://www.npmjs.com/package/request#controlling-proxy-behaviour-using-environment-variables): just set the `HTTPS_PROXY` environment variable correctly and you should be good to go.
+
 ## Remote kill-switch
 
 Active Facebook sessions can be [tracked and managed here](https://www.facebook.com/settings?tab=security&section=sessions&view#_=_): sessions can be killed remotely at that page.
