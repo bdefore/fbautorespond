@@ -84,6 +84,7 @@ function autorespond() {
     const responder = new Responder({
       api,
       log,
+      forgetThreadsAfter: argv.forgetThreadsAfter,
       response: argv.response,
     });
     if (argv.pollOther) {
