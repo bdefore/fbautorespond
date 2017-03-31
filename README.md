@@ -39,6 +39,12 @@ The default behaviour is to respond once and only once to each new thread.  If y
 
 Additionally, by default only messages in the inbox are handled.  If you want to auto-respond to messages in either the 'pending' or 'other' folders you can set a duration to poll for them using the `--pol-pending` and `--poll-other` switches.
 
+### Response templates
+
+Response strings are templates where the following strings will be replaced:
+
+- `{{sender}}`: replaced with the first name of the user who send the message being responded to.
+
 ### Re-logins
 
 There is currently a [bug in the library](https://github.com/Schmavery/facebook-chat-api/issues/202) used to connect to Facebook which can cause the script to start erroring after unspecified period of time (usually a few days).  To work around this you can set the script to re-login at a given interval which should keep your connection stable.
