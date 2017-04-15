@@ -26,7 +26,6 @@ Options:
   --response              The response to send on new messages        [required]
   --email                 The email address to login with             [required]
   --password              The password to authenticate with
-  --relogin               The number of minutes to relogin after
   --poll-other            Interval to poll for messages in the other folder
   --poll-pending          Interval to poll for messages in the pending folder
   --forget-threads-after  Time to wait before forgetting threads
@@ -44,10 +43,6 @@ Additionally, by default only messages in the inbox are handled.  If you want to
 Response strings are templates where the following strings will be replaced:
 
 - `{{sender}}`: replaced with the first name of the user who send the message being responded to.
-
-### Re-logins
-
-There is currently a [bug in the library](https://github.com/Schmavery/facebook-chat-api/issues/202) used to connect to Facebook which can cause the script to start erroring after unspecified period of time (usually a few days).  To work around this you can set the script to re-login at a given interval which should keep your connection stable.
 
 ### Two-factor login
 
@@ -68,7 +63,6 @@ The script is [Dockerized](https://hub.docker.com/r/jamiekp/fbautorespond/) for 
 * `FB_AUTORESPOND_RESPONSE`
 * `FB_AUTORESPOND_EMAIL`
 * `FB_AUTORESPOND_PASSWORD`
-* `FB_AUTORESPOND_RELOGIN`
 * `FB_AUTORESPOND_FORGET_THREADS_AFTER`
 * `FB_AUTORESPOND_LOG_LEVEL`
 

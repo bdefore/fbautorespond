@@ -11,7 +11,6 @@ const argv = require('yargs')
       .describe('response', 'The response to send on new messages')
       .describe('email', 'The email address to login with')
       .describe('password', 'The password to authenticate with')
-      .describe('relogin', 'The number of minutes to relogin after')
       .describe('poll-other', 'Interval to poll for messages in the other folder')
       .describe('poll-pending', 'Interval to poll for messages in the pending folder')
       .describe('forget-threads-after', 'Time to wait before forgetting threads')
@@ -46,7 +45,7 @@ function pollMessages(api, responder, folder) {
   });
 }
 
-function autorespond() {
+(function autorespond() {
   let stopListening;
   let pollOther;
   let pollPending;
@@ -106,24 +105,5 @@ function autorespond() {
     });
   });
   return stop;
-}
+}());
 
-// The keep-alive parameter forces the script to re-login at a given
-// interval: this is currently needed for long-running instances
-// because of a bug in the underlying library we are using.
-// https://github.com/Schmavery/facebook-chat-api/issues/202
-if (argv.relogin) {
-  let i = 0;
-  const timeout = argv.relogin * 60 * 1000;  // timeout in ms
-  let stop = autorespond();
-
-  setInterval(() => {
-    i += 1;
-    log.info(`Refreshing login ${i * argv.relogin} minutes`);
-    stop(() => {
-      stop = autorespond();
-    });
-  }, timeout);
-} else {
-  autorespond();
-}
