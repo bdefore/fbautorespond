@@ -71,6 +71,7 @@ The script is [Dockerized](https://hub.docker.com/r/jamiekp/fbautorespond/) for 
 - [] Run unit-tests on automated builds.
 - [] Document golden path for running in the cloud.
 - [] Fix website and link to it in the project description on Github.
+- [] Integrate [prettier.js](https://prettier.github.io/prettier/)
 
 ## Donations
 
