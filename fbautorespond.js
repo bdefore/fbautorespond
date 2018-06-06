@@ -79,6 +79,7 @@ function pollMessages(api, responder, folder) {
       log.error(err);
       process.exit(1);
     }
+    api.setOptions({ selfListen: true });
     fs.writeFileSync(stateFile, JSON.stringify(api.getAppState()));
     const responder = new Responder({
       api,
